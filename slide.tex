@@ -142,9 +142,9 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
   \\~\\[-.5\baselineskip]
 
   2月21日のエンジニア作業飲み集会でLT発表\\
-  \hspace{1.5\zw}電話局の数: 13 → 32\\
-  \hspace{2.5\zw}端末の数: 58 → 198
-  \hspace{1.5\zw}（2025-05-11現在）
+  \hspace{1.5\zw}電話局の数: 13 → 33\\
+  \hspace{2.5\zw}端末の数: 58 → 223\\
+  \hspace{1.5\zw}（2025-05-16 20:00現在）
 
   \note{
     東京広域電話網は分散型のオレオレIP電話網だよ。
@@ -167,12 +167,12 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
     \begin{column}{.28\textwidth}
       \begin{description}[labelwidth=\linewidth]
         \item[交換局数]
-          32局
+          33局
         \item[端末数]
-          198以上\\
+          223以上\\
           （仮想含む）
         \item[うち黒電話]
-          22程度
+          26程度
         \item[その他]
           ピンク電話\\
           ISDNやPHS
@@ -342,10 +342,11 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
 
   例えば……\\
   \hspace{1.5\zw}他局のMikoPBXの設定画面（Web UI）にアクセスできる\\
-  \hspace{1.5\zw}MikoPBXをホストしているコンテナにSSHできる
+  \hspace{1.5\zw}MikoPBXをホストしているコンテナにSSHできる\\
+  \hspace{1.5\zw}電話に関係のないサービスまで露出する
   \\~\\[-.5\baselineskip]
 
-  なんかちょっと怖そう（かなり怖そう）
+  \hfill ↑ なんかちょっと怖そう（かなり怖そう）
 
   \note{ }
 \end{frame}
@@ -357,7 +358,7 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
   \hspace{1.5\zw}Tailnet上でアクセス制御をする手段
   \\~\\[-.5\baselineskip]
 
-  Deny for defaultからアクセス許可するルールを列挙する\\
+  Deny by defaultからアクセス許可するルールを列挙する\\
   \hspace{1.5\zw}初期状態では全アクセスを許可するルールを設定済
 
   \note{ }
@@ -442,7 +443,7 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
   \raggedright
   第8章 アプリケーションプロトコル，
   「マスタリングTCP/IP 入門編（第6版）」，
-  p.334，
+  p.331，
   株式会社オーム社，2021．}
   \\~\\[3\baselineskip]
 
@@ -539,7 +540,7 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
   \\~\\[-.5\baselineskip]
 
   しかもなんか変なNICに出てる\\
-  \hspace{1.5\zw}tailnet上の通信は仮想NIC（\texttt{tialscale0}）に流れるハズ\\
+  \hspace{1.5\zw}Tailnet上の通信は仮想NIC（\texttt{tailscale0}）に流れるハズ\\
   \hspace{1.5\zw}発狂している通信では物理NIC（\texttt{eth0}）に流れている
 
   \note{ }
@@ -548,7 +549,7 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
 \begin{frame}
   \frametitle{あぁ、ちゃんと100.70.198.29にパケット投げてるのに！}
 
-  「え、100.67.198.29って誰ですか」
+  「え、100.70.198.29って誰ですか」
   \\~\\[2\baselineskip]
 
   「は？」
@@ -587,8 +588,8 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
   SIPで通信できたのはNAT的ふるまいのおかげ
 
   RTPはSIPで指定されたIPアドレス・ポートを使う\\
-  \hspace{1.5\zw}指定された場所は存在しないのでルーティングで発狂\\
-  \hspace{1.5\zw}実行環境のLinuxも混乱して\texttt{eth0}にパケットぶん投げる
+  \hspace{1.5\zw}指定された場所はルーティングテーブルに存在しない\\
+  \hspace{1.5\zw}デフォルトルートである\texttt{eth0}にパケットをぶん投げる
 
   \note{ }
 \end{frame}
@@ -627,7 +628,10 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
   \end{itemize}
 
   そもそも異なるIPv4アドレスが見えていたのに\\
-  \hspace{1.5\zw}通信できていた局も存在していたのでした（何もわからん）
+  \hspace{1.5\zw}通信できていた局も存在していたのでした
+
+  つまりルーティングテーブルにないホストと通信できている\\
+  \hspace{1.5\zw}（もう何もわからん）
 
   \note{ }
 \end{frame}
@@ -653,7 +657,19 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
 \end{frame}
 
 \begin{frame}[standout]
-  おわりです
+  東京広域電話網は\\
+  {\Huge 老練な\\ネットワークエンジニア}\\
+  を募集しています\\[1\baselineskip]
+  {\tiny 電話屋さん、懐古厨、カーネルエンジニア、信号処理屋さん、古代のコンピュータ技術者を含む一般人・逸般人も可}
+  \\[-2\baselineskip]
+
+  \note{ }
+\end{frame}
+
+\begin{frame}[standout]
+  おわりです\\[3\baselineskip]
+  {\small\mdseries \textit{Telephone for Everyone, Connecting Heritages}}
+  \\[-4\baselineskip]
   \note{
     発表おわり〜
   }
