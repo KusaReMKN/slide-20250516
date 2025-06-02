@@ -37,20 +37,21 @@
 
 % 下に文字置くやつ
 \NewDocumentCommand\replace{mm}{%
-  \stackengine{-1\zh}{\dsout{#1}}{#2}{O}{c}{F}{F}{L}}
+  \smash{\stackengine{-1\zh}{\dsout{#1}}{#2}{O}{c}{F}{F}{L}}}
 
 \usepackage{hyperref}
 
 \title{オレオレIP電話網を大きくしたら\\
-Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜いて発狂した話}
-\subject{エンジニア作業飲み集会\#125}
+Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜いて発狂した話\\
+\hfill（再放送版）}
+\subject{CS集会\#53}
 \author{上羽 未栞（a.k.a. KusaReMKN）}
 \institute{%
   \href{https://tkytel.github.io/}{東京広域電話網〈\url{https://tkytel.github.io/}〉}\\
   \url{https://KusaReMKN.com/}\\
   Twitter: \href{https://twitter.com/KusaReMKN}{@KusaReMKN}}
 \keywords{Tailscale; 黒電話; VoIP; IP電話; MikoPBX; 東京広域電話網}
-\date{2025-05-16}
+\date{2025-06-03}
 
 \begin{document}
 
@@ -142,9 +143,9 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
   \\~\\[-.5\baselineskip]
 
   2月21日のエンジニア作業飲み集会でLT発表\\
-  \hspace{1.5\zw}電話局の数: 13 → 33\\
-  \hspace{2.5\zw}端末の数: 58 → 223\\
-  \hspace{1.5\zw}（2025-05-16 20:00現在）
+  \hspace{1.5\zw}電話局の数: 13 → 34\\
+  \hspace{2.5\zw}端末の数: 58 → 234\\
+  \hspace{1.5\zw}（2025-06-01 14:14現在）
 
   \note{
     東京広域電話網は分散型のオレオレIP電話網だよ。
@@ -167,12 +168,12 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
     \begin{column}{.28\textwidth}
       \begin{description}[labelwidth=\linewidth]
         \item[交換局数]
-          33局
+          34局
         \item[端末数]
-          223以上\\
+          234以上\\
           （仮想含む）
         \item[うち黒電話]
-          26程度
+          29程度？
         \item[その他]
           ピンク電話\\
           ISDNやPHS
@@ -180,7 +181,7 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
     \end{column}
     \begin{column}{.7\textwidth}
       \centering
-      \includegraphics[height=.88\textheight]{./images/mantela.png}
+      \includegraphics[height=.9\textheight]{./images/mantela.png}
     \end{column}
   \end{columns}
 
@@ -189,6 +190,19 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
     ネットワークが複雑でちょっと見づらいのは許してね。
   }
 \end{frame}
+
+
+\begin{frame}
+  \frametitle{さまざまな東京}
+
+  \centering
+  \includegraphics[height=\textheight]{./images/map.png}
+
+  \note{
+    東京ってさまざまなところにあります
+  }
+\end{frame}
+
 
 \begin{frame}
   \frametitle{東京広域電話網コミュニティ}
@@ -679,6 +693,7 @@ Tailscaleの\texorpdfstring{\replace{不具合}{ワナ}}{ワナ}を踏み抜い�
   \frametitle{このスライドについて}
 
   Written in May 2025.
+  Updated in June 2025.
   \\~\\[-.5\baselineskip]
 
   Permanent ID of this document: \texttt{c8edfb391dbbafd3}.
